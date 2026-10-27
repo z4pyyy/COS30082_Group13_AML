@@ -1,0 +1,16 @@
+# Data: share by Drive/zip, not git
+DPD_Small/
+DPD_Small_clean/images/
+*.7z
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Training outputs
+checkpoints/
+runs/
+*.pt
+*.pth

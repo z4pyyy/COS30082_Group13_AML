@@ -1,0 +1,11 @@
+images: 11448
+decode errors: 0
+extension mismatch: 11
+modes: {'RGB': 11420, 'RGBA': 28}
+width  min/median/max: 69/448/6000
+height min/median/max: 52/448/5312
+aspect (w/h) p5/median/p95: 0.75/1.00/1.54
+smaller than 224 on short side: 349
+near-dup pairs (pHash<= 4): 44
+  cross-split pairs: 5  {('train', 'test_seen'): 5}
+  pairs with different labels: 1
