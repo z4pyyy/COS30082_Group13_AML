@@ -1,0 +1,4 @@
+Model,Seen Top-1,Unseen Top-1,H Top-1,Seen Top-3,Unseen Top-3,H Top-3,Seen Top-5,Unseen Top-5,H Top-5
+ResNet50,87.7,66.99,75.96,93.8,76.93,84.53,95.45,80.87,87.56
+EfficientNet-B0,87.15,63.47,73.45,92.2,74.86,82.63,93.7,78.11,85.2
+ConvNeXt-Tiny,91.8,77.62,84.12,96.55,88.88,92.56,97.75,91.3,94.41
