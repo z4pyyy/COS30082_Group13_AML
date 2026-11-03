@@ -1,0 +1,13 @@
+{
+  "run": "convnext_mt_baseline_30ep",
+  "backbone": "convnext_tiny",
+  "finetune": false,
+  "epochs": 30,
+  "batch_size": 64,
+  "lr": 0.001,
+  "weight_decay": 0.05,
+  "workers": 4,
+  "seed": 42,
+  "limit_batches": 0,
+  "device": "cuda"
+}

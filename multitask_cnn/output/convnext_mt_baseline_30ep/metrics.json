@@ -1,0 +1,19 @@
+{
+  "test_seen": {
+    "top1": 0.5795,
+    "top5": 0.85,
+    "crop_acc": 0.875,
+    "disease_acc": 0.594,
+    "n": 2000,
+    "seen_images_predicted_as_unseen_comp": 5
+  },
+  "test_unseen": {
+    "top1": 0.03038674033149171,
+    "top5": 0.27417127071823205,
+    "crop_acc": 0.6222375690607734,
+    "disease_acc": 0.05110497237569061,
+    "n": 1448
+  },
+  "harmonic_mean_top1": 0.05774552833376363,
+  "harmonic_mean_top5": 0.4146086742843101
+}
