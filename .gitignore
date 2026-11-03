@@ -14,3 +14,7 @@ checkpoints/
 runs/
 *.pt
 *.pth
+
+# v2 dataset build output (upload to Kaggle, not git)
+DPD_Small_clean_v2/
+multitask_cnn/dataset/
