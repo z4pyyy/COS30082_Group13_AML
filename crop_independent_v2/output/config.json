@@ -1,0 +1,39 @@
+{
+  "task": "crop",
+  "out": "/content/crop_independent_v2",
+  "models": {
+    "ResNet50": {
+      "timm_id": "resnet50.tv2_in1k",
+      "lr": 0.0003
+    },
+    "EfficientNet-B0": {
+      "timm_id": "efficientnet_b0.ra_in1k",
+      "lr": 0.0005
+    },
+    "ConvNeXt-Tiny": {
+      "timm_id": "convnext_tiny.fb_in1k",
+      "lr": 0.0001
+    }
+  },
+  "epochs": 30,
+  "patience": 10,
+  "batch_size": 64,
+  "workers": 2,
+  "seed": 42,
+  "label_smooth": 0.1,
+  "weight_decay": 0.05,
+  "no_pretrained": false,
+  "limit_batches": 0,
+  "dataset": "DPD_Small_clean_v2",
+  "protocol": "best epoch = max H(val Top-1, val_unseen Top-1)",
+  "optimizer": "AdamW",
+  "schedule": "OneCycleLR pct_start=0.1",
+  "amp": true,
+  "device": "cuda",
+  "gpu": "Tesla T4",
+  "versions": {
+    "python": "3.13.16",
+    "torch": "2.11.0+cu130",
+    "timm": "1.0.30"
+  }
+}
