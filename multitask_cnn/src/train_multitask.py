@@ -23,7 +23,7 @@ import torch
 import torch.nn as nn
 
 from src.common import RUNS_DIR, comp_index, get_loaders, load_label_maps, save_json, seed_everything
-from src.metrics import comp_scores, topk_correct
+from src.metrics import comp_scores, harmonic_mean, topk_correct
 from src.models import MultiTaskCNN
 
 
@@ -38,6 +38,7 @@ def parse_args():
     p.add_argument("--weight-decay", type=float, default=0.05)
     p.add_argument("--workers", type=int, default=4)
     p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--patience", type=int, default=10, help="early stopping on val_H")
     p.add_argument("--limit-batches", type=int, default=0, help="debug: stop each epoch after N batches")
     return p.parse_args()
 
@@ -90,7 +91,7 @@ def main():
     n_train = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"device={device}  trainable params={n_train/1e6:.2f}M  backbone {'fine-tuned' if args.finetune else 'frozen'}")
 
-    best, log_rows = -1.0, []
+    best, bad, log_rows = -1.0, 0, []
     for epoch in range(1, args.epochs + 1):
         model.train()
         if not args.finetune:
@@ -112,20 +113,29 @@ def main():
             run_loss += loss.item() * x.size(0)
             seen += x.size(0)
         val = evaluate_val(model, loaders["val"], cd, device, args.limit_batches)
-        row = {"epoch": epoch, "train_loss": run_loss / seen, **val, "secs": round(time.time() - t0, 1)}
+        val_u = evaluate_val(model, loaders["val_unseen"], cd, device, args.limit_batches)
+        h = harmonic_mean(val["comp_top1"], val_u["comp_top1"])
+        row = {"epoch": epoch, "train_loss": run_loss / seen, **val,
+               **{f"unseen_{k}": v for k, v in val_u.items()}, "val_H": h, "secs": round(time.time() - t0, 1)}
         log_rows.append(row)
         print(" ".join(f"{k}={v:.4f}" if isinstance(v, float) else f"{k}={v}" for k, v in row.items()))
-        state = {"model": model.state_dict(), "args": vars(args), "epoch": epoch, "val": val}
+        state = {"model": model.state_dict(), "args": vars(args), "epoch": epoch, "val": val,
+                 "val_unseen": val_u, "val_H": h}
         torch.save(state, out_dir / "last.pt")
-        if val["comp_top1"] > best:
-            best = val["comp_top1"]
+        if h > best:
+            best, bad = h, 0
             torch.save(state, out_dir / "best.pt")
+        else:
+            bad += 1
+            if bad >= args.patience:
+                print(f"early stop at epoch {epoch} (no new best val_H for {args.patience} epochs)")
+                break
 
     with open(out_dir / "train_log.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(log_rows[0]))
         w.writeheader()
         w.writerows(log_rows)
-    print(f"best val comp top-1 = {best:.4f}  ->  {out_dir / 'best.pt'}")
+    print(f"best val_H (pair top-1) = {best:.4f}  ->  {out_dir / 'best.pt'}")
     print(f"next: python -m src.evaluate --run {args.run}")
 
 
