@@ -10,14 +10,14 @@ import numpy as np
 import torch
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DATA_ROOT = PROJECT_ROOT / "dataset" / "DPD_Small_clean"
+DATA_ROOT = PROJECT_ROOT / "dataset" / "DPD_Small_clean_v2"
 RUNS_DIR = PROJECT_ROOT / "runs"
 
-# Make `from DPD_Small_clean.dataset import ...` work from anywhere.
+# Make `from DPD_Small_clean_v2.dataset import ...` work from anywhere.
 if str(DATA_ROOT.parent) not in sys.path:
     sys.path.insert(0, str(DATA_ROOT.parent))
 
-from DPD_Small_clean.dataset import get_loaders, load_label_maps  # noqa: E402
+from DPD_Small_clean_v2.dataset import get_loaders, load_label_maps  # noqa: E402
 
 
 def seed_everything(seed: int = 42) -> None:

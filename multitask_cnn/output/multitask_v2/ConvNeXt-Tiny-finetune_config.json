@@ -1,0 +1,14 @@
+{
+  "run": "convnext_mt_finetune_v2",
+  "backbone": "convnext_tiny",
+  "finetune": true,
+  "epochs": 30,
+  "batch_size": 32,
+  "lr": 0.001,
+  "weight_decay": 0.05,
+  "workers": 4,
+  "seed": 42,
+  "patience": 10,
+  "limit_batches": 0,
+  "device": "cuda"
+}
