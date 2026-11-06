@@ -1,0 +1,7 @@
+,alternaria_blotch,brown_spot,grey_spot,healthy,rust,marssonina_blotch,mosaic_virus,powdery_mildew,anthracnose,yellow_mosaic,botrytis_blight,red_rust,bacterial_blight,green_mite,mosaic,early_blight,spot,curl,yellowing,greening,berry_blotch,spider_mites,leaf_blight,bacterial_wilt,esca,tungro,brown_rot,early_leaf_spot,slug,late_blight,fire_blight,gray_mold,septoria_leaf_spot,verticulium_wilt
+mosaic_virus,4,1,23,7,0,6,1,5,9,1,0,2,0,2,2,0,1,0,0,0,0,0,0,0,0,0,2,0,3,0,0,1,0,0
+spot,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,22,0,0,0,0,0
+curl,0,0,0,0,3,0,0,0,2,0,1,0,0,0,0,0,0,0,0,0,3,0,0,1,1,0,0,0,0,0,1,0,0,0
+yellowing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,1,0,0,0,0,0,0,0,0
+leaf_blight,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,13
+late_blight,0,1,0,2,0,0,0,0,0,0,0,0,20,0,0,12,0,0,0,1,0,1,0,0,0,0,0,0,0,31,0,0,2,0
