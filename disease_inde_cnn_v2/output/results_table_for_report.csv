@@ -1,0 +1,4 @@
+Model,best_epoch,epochs_run,Train(clean) Top-1,Val Top-1,ValUnseen Top-1,Seen Top-1,Seen Top-5,Seen(excl heldout) Top-1,Unseen Top-1,Unseen Top-5,H Top-1,H Top-5
+ResNet50,15,25,98.66,82.41,15.42,65.05,83.7,66.91,8.63,27.97,15.24,41.93
+EfficientNet-B0,15,25,99.36,80.6,14.1,64.85,83.75,66.7,8.91,26.66,15.67,40.44
+ConvNeXt-Tiny,10,20,91.07,81.37,16.3,64.3,84.35,66.13,14.09,33.29,23.11,47.74

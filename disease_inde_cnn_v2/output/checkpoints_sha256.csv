@@ -1,0 +1,4 @@
+file,size_MB,sha256
+ResNet50_best.pt,95.8,78521ad49b18d945314aeeac73e41a2490fa387af13286d7d9c79608fa9475e9
+EfficientNet-B0_best.pt,17.2,fd1b94ae723bd5816687ca13fe4b27165fac976f6d82df93fe892d641f4e33f9
+ConvNeXt-Tiny_best.pt,111.9,c18c6bbd8cb46afc4d78d5b3ad4a949024c21c808b92f4775b6898b8dd63d808

@@ -1,0 +1,4 @@
+Model,Val Top-1,Val-unseen Top-1,Seen Top-1,Unseen Top-1,H Top-1,Seen Top-3,Unseen Top-3,H Top-3,Seen Top-5,Unseen Top-5,H Top-5,Seen excl. held-out Top-1,Seen per-class Top-1,Unseen per-class Top-1,Train (clean) Top-1
+ResNet50,82.41,15.42,65.05,8.63,15.24,79.0,21.13,33.35,83.7,27.97,41.93,66.91,45.08,15.02,98.66
+EfficientNet-B0,80.6,14.1,64.85,8.91,15.67,79.85,19.54,31.4,83.75,26.66,40.44,66.7,43.55,13.82,99.36
+ConvNeXt-Tiny,81.37,16.3,64.3,14.09,23.11,79.8,25.07,38.15,84.35,33.29,47.74,66.13,35.1,19.49,91.07
