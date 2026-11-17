@@ -1,6 +1,6 @@
 # Independent disease CNN on DPD_Small_clean_v2: disease_independent_v2
 
-**Author:** TODO  ·  **Date:** TODO  ·  **Track:** independent disease CNN
+**Author:** Ji Yan LIM  ·  **Date:** 5/11/2026  ·  **Track:** independent disease CNN
 **Run type:** main protocol run
 
 > Items marked **TODO** are values that were not in the run logs (author, dates, versions, commit, WhatsApp dates) or results of `disease_v2_extra_analysis.ipynb` that still have to be pasted in. Everything else comes from the executed notebook `disease_independent_cnns_v2.ipynb`.
