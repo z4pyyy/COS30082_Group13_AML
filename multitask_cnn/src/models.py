@@ -8,6 +8,10 @@ from torchvision import models
 
 def build_backbone(name: str = "convnext_tiny", pretrained: bool = True) -> tuple[nn.Module, int]:
     """Return an ImageNet-pretrained feature extractor (B,3,H,W) -> (B,D) and D."""
+    if name.startswith("timm:"):                   # e.g. "timm:convnext_tiny.fb_in1k": same pinned weights as the independent tracks
+        import timm
+        m = timm.create_model(name[5:], pretrained=pretrained, num_classes=0)   # pooled features, no classifier
+        return m, m.num_features
     if name == "convnext_tiny":
         m = models.convnext_tiny(weights="DEFAULT" if pretrained else None)
         dim = m.classifier[2].in_features          # 768
