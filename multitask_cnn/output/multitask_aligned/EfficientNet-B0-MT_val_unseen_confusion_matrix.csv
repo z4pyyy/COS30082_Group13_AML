@@ -1,0 +1,7 @@
+,apple_alternaria_blotch,apple_brown_spot,apple_frog_eye_leaf_spot,apple_grey_spot,apple_healthy,apple_rust,apple_marssonina_blotch,apple_mosaic_virus,apple_powdery_mildew,apple_scab,blackgram_yellow_mosaic,blueberry_botrytis_blight,blueberry_healthy,broccoli_alternaria_leaf_spot,cassava_bacterial_blight,cassava_green_mite,cassava_healthy,cassava_mosaic,citrus_greening,coffee_berry_blotch,corn_healthy,corn_leaf_blight,corn_northern_leaf_blight,corn_yellowing,cotton_powdery_mildew,grape_esca,mango_healthy,mango_powdery_mildew,peach_curl,pear_erwinia_amylovora,pear_slug,pear_spot,potato_early_blight,potato_healthy,potato_late_blight,raspberry_fire_blight,sunflower_gray_mold,tomato_brown_spot,tomato_early_blight,tomato_late_blight,tomato_leaf_blight,tomato_curl,tomato_septoria_leaf_spot,tomato_verticulium_wilt
+apple_mosaic_virus,9,1,1,18,13,0,11,0,0,0,6,0,0,0,0,3,0,1,0,0,1,0,0,0,1,0,1,2,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+corn_yellowing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+peach_curl,0,0,0,0,0,1,0,0,1,0,0,1,0,1,0,0,0,1,0,3,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0
+pear_spot,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,21,0,0,0,0,0,0,0,0,0,0,0,0,0
+potato_late_blight,0,0,0,0,1,0,0,0,0,1,0,0,1,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,3,5,0,0,0,1,20,0,0,0,0
+tomato_leaf_blight,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,3,17,15
