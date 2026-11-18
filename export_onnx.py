@@ -13,7 +13,8 @@ so pair scoring is identical for both approaches:
     pair_score[comp] = log p(crop[comp]) + log p(disease[comp])     (333 comps)
 
 Evaluation runs the exported ONNX files (what the page runs), not PyTorch, on
-val / val_unseen / test_seen / test_unseen, and stores metrics per head (summary.json).
+val / val_unseen / test_seen / test_unseen, and stores metrics per head (summary.json, all models) and sparse
+confusion matrices (results/, GUI models only).
 A parity check compares ONNX with PyTorch on a batch of test images first.
 """
 
@@ -37,8 +38,9 @@ DATA = ROOT / "DPD_Small_clean_v2"
 WEB = ROOT / "web"
 MEAN, STD = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
 SIZE = 224
-# ponytail: GUI shows ConvNeXt-Tiny only (best baseline backbone); add names here to bring others back.
-BACKBONES = ["ConvNeXt-Tiny"]
+BACKBONES = ["ResNet50", "EfficientNet-B0", "ConvNeXt-Tiny"]   # all evaluated -> compare table
+GUI_BACKBONES = ["ConvNeXt-Tiny"]                              # runnable in the page + confusion matrices
+BUILD = ROOT / "build" / "onnx"                                # ONNX of non-GUI models (gitignored, eval only)
 SPLITS = {"test_seen": "test_seen.csv", "test_unseen": "test_unseen.csv", "val": "val.csv", "val_unseen": "val_unseen.csv"}
 
 # file stem -> checkpoint path
@@ -48,7 +50,7 @@ for b in BACKBONES:
     CKPTS[f"disease_{b}"] = ROOT / "disease_inde_cnn_v2/output/models" / f"{b}_best.pt"
     CKPTS[f"mt_{b}"] = ROOT / "multitask_cnn/output/models" / f"{b}_best.pt"
 
-# GUI option -> ONNX files it needs
+# option -> ONNX files it needs
 OPTIONS = {}
 for b in BACKBONES:
     OPTIONS[f"Independent/{b}"] = [f"crop_{b}", f"disease_{b}"]
@@ -124,10 +126,14 @@ def load_image(path):
     return ((a - MEAN) / STD).transpose(2, 0, 1).astype(np.float32)
 
 
-def export(stem, out_dir):
+def onnx_path(stem):
+    return (WEB / "models" if stem.split("_", 1)[1] in GUI_BACKBONES else BUILD) / f"{stem}.onnx"
+
+
+def export(stem):
     model, epoch = load_wrapper(stem)
     names = [f"{h}_{k}" for h in model.heads for k in ("probs", "cam")]
-    path = out_dir / f"{stem}.onnx"
+    path = onnx_path(stem)
     torch.onnx.export(model, (torch.randn(1, 3, SIZE, SIZE),), str(path), input_names=["input"],
                       output_names=names, opset_version=17, dynamo=False,
                       dynamic_axes={"input": {0: "b"}, **{n: {0: "b"} for n in names}})
@@ -165,7 +171,13 @@ def metrics(scores, y, ks=(1, 3, 5)):
     m = {f"top{k}": round(float(hit[:, :k].any(1).mean() * 100), 2) for k in ks}
     pred = top[:, 0]
     m["per_class_top1"] = round(float(np.mean([(pred[y == c] == c).mean() for c in np.unique(y)]) * 100), 2)
-    return m
+    return m, pred
+
+
+def sparse_cm(y, pred):
+    """Confusion matrix as [true, pred, count] triples (non-zero cells only)."""
+    pairs, counts = np.unique(np.stack([y, pred], 1), axis=0, return_counts=True)
+    return [[int(a), int(b), int(c)] for (a, b), c in zip(pairs, counts)]
 
 
 def evaluate(maps, cd):
@@ -177,7 +189,7 @@ def evaluate(maps, cd):
         print(f"  loaded {split}: {len(df)} images")
     for stem in CKPTS:
         for split, (df, x) in xs.items():
-            cache[stem, split] = run_onnx(WEB / "models" / f"{stem}.onnx", x)
+            cache[stem, split] = run_onnx(onnx_path(stem), x)
         print(f"  ran {stem}")
 
     results = {}
@@ -191,7 +203,10 @@ def evaluate(maps, cd):
             pair = lc[:, cd[:, 0]] + ld[:, cd[:, 1]]
             y = {"pair": df.comp_id.values, "crop": df.crop_id.values, "disease": df.disease_id.values}
             sc = {"pair": pair, "crop": lc, "disease": ld}
-            r[split] = {"n": len(df), "metrics": {h: metrics(sc[h], y[h]) for h in ("pair", "crop", "disease")}}
+            r[split] = {"n": len(df), "metrics": {}, "cm": {}}
+            for h in ("pair", "crop", "disease"):
+                r[split]["metrics"][h], pred = metrics(sc[h], y[h])
+                r[split]["cm"][h] = sparse_cm(y[h], pred)
         hm = lambda a, b: round(2 * a * b / (a + b), 2) if a + b else 0.0
         r["harmonic"] = {k: hm(r["test_seen"]["metrics"]["pair"][k], r["test_unseen"]["metrics"]["pair"][k])
                          for k in ("top1", "top3", "top5")}
@@ -223,13 +238,15 @@ def main():
     maps = json.loads((DATA / "label_maps.json").read_text())
     cd = np.array([maps["comp_to_crop_disease"][str(c)] for c in range(maps["num_comps"])])
     (WEB / "models").mkdir(parents=True, exist_ok=True)
+    BUILD.mkdir(parents=True, exist_ok=True)
 
     info_path = WEB / "models.json"
     if a.skip_export:
         files = json.loads(info_path.read_text())["files"]
     else:
         print("export:")
-        files = {s: export(s, WEB / "models") for s in CKPTS}
+        files = {s: export(s) for s in CKPTS}
+        files = {s: f for s, f in files.items() if onnx_path(s).parent == WEB / "models"}
     print("evaluate (ONNX):")
     results = evaluate(maps, cd)
 
@@ -241,13 +258,16 @@ def main():
         "comp_to_crop_disease": cd.tolist(),
         "unseen_comp_ids": maps["unseen_comp_ids"],
         "examples": pick_examples(),
-        "options": {k: v for k, v in OPTIONS.items()},
+        "options": {k: v for k, v in OPTIONS.items() if k.split("/")[1] in GUI_BACKBONES},
     }
     (WEB / "meta.json").write_text(json.dumps(meta))
     info_path.write_text(json.dumps({"files": files}, indent=1))
     summary = {opt: {"harmonic": r["harmonic"], **{s: r[s]["metrics"] for s in SPLITS}} for opt, r in results.items()}
+    (WEB / "results").mkdir(exist_ok=True)
+    for opt in meta["options"]:
+        (WEB / "results" / f"{opt.replace('/', '_')}.json").write_text(json.dumps(results[opt], separators=(",", ":")))
     (WEB / "summary.json").write_text(json.dumps(summary, indent=1))
-    print("wrote web/meta.json, web/models.json, web/summary.json, web/examples/")
+    print("wrote web/meta.json, web/models.json, web/summary.json, web/results/, web/examples/")
 
 
 if __name__ == "__main__":

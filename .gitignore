@@ -21,3 +21,6 @@ multitask_cnn/dataset/
 
 # macOS
 .DS_Store
+
+# ONNX of models not shown in the GUI (export_onnx.py)
+build/
