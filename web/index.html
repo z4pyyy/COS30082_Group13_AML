@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Plant Disease Validator</title>
-<meta name="description" content="DPD-Small plant disease classifiers (independent and multitask CNNs). Pick a model, test images and compare performance. Runs in your browser with ONNX Runtime Web.">
+<meta name="description" content="DPD-Small plant disease classifiers (independent and multitask CNNs). Pick a model, test images, inspect its confusion matrices and compare performance. Runs in your browser with ONNX Runtime Web.">
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.webgpu.min.js"></script>
 </head>
@@ -80,8 +80,29 @@
   </section>
 
   <section class="card mt">
-    <h2>3. Compare models</h2>
-    <p class="muted small">Pair accuracy (%) from the exported ONNX models. H = harmonic mean of seen and unseen. Confusion matrices are in the report. Click a row to select that model.</p>
+    <h2>3. Confusion matrix — <span id="cmModel"></span></h2>
+    <div class="cm-ctl">
+      <label>Head <select id="cmHead"><option value="pair">pair (333)</option><option value="crop">crop (55)</option><option value="disease">disease (175)</option></select></label>
+      <label>Split <select id="cmSplit"><option value="test_seen">test_seen</option><option value="test_unseen">test_unseen</option><option value="val">val</option><option value="val_unseen">val_unseen</option></select></label>
+      <label><input type="checkbox" id="cmNorm" checked> Row-normalise</label>
+    </div>
+    <div class="metric-row" id="cmMetrics"></div>
+    <div class="cm-grid">
+      <div class="cm-wrap">
+        <canvas id="cm" width="640" height="640" aria-label="Confusion matrix heatmap. Rows are true classes, columns are predicted classes."></canvas>
+        <div class="cm-tip" id="cmTip" hidden></div>
+        <div class="cm-legend"><span>0</span><div class="cm-bar"></div><span id="cmMax">100% of row</span></div>
+        <p class="muted small">Rows = true, columns = predicted. Only classes that appear in this split (true or predicted) are shown, in id order. Hover a cell for details.</p>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Top 10 confusions</h3>
+        <ol class="confs" id="cmTop"></ol>
+      </div>
+    </div>
+  </section>
+  <section class="card mt">
+    <h2>4. Compare all models</h2>
+    <p class="muted small">Pair accuracy (%) from the exported ONNX models. H = harmonic mean of seen and unseen. Click a ConvNeXt-Tiny row to run that model above. ResNet50 and EfficientNet-B0 are shown for comparison only.</p>
     <div class="table-wrap"><table id="cmp"></table></div>
   </section>
 </main>
