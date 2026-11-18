@@ -1,0 +1,115 @@
+{
+ "files": {
+  "crop_ResNet50": {
+   "file": "models/crop_ResNet50.onnx",
+   "mb": 47.2,
+   "heads": [
+    "crop"
+   ],
+   "epoch": 9,
+   "parity": {
+    "top1_agree": 1.0,
+    "max_abs_prob_diff": 0.0015900135040283203
+   }
+  },
+  "disease_ResNet50": {
+   "file": "models/disease_ResNet50.onnx",
+   "mb": 47.7,
+   "heads": [
+    "disease"
+   ],
+   "epoch": 15,
+   "parity": {
+    "top1_agree": 1.0,
+    "max_abs_prob_diff": 0.0025605857372283936
+   }
+  },
+  "mt_ResNet50": {
+   "file": "models/mt_ResNet50.onnx",
+   "mb": 48.0,
+   "heads": [
+    "crop",
+    "disease"
+   ],
+   "epoch": 12,
+   "parity": {
+    "top1_agree": 1.0,
+    "max_abs_prob_diff": 0.0010849833488464355
+   }
+  },
+  "crop_EfficientNet-B0": {
+   "file": "models/crop_EfficientNet-B0.onnx",
+   "mb": 8.2,
+   "heads": [
+    "crop"
+   ],
+   "epoch": 25,
+   "parity": {
+    "top1_agree": 1.0,
+    "max_abs_prob_diff": 0.0013967454433441162
+   }
+  },
+  "disease_EfficientNet-B0": {
+   "file": "models/disease_EfficientNet-B0.onnx",
+   "mb": 8.5,
+   "heads": [
+    "disease"
+   ],
+   "epoch": 15,
+   "parity": {
+    "top1_agree": 1.0,
+    "max_abs_prob_diff": 0.0023418664932250977
+   }
+  },
+  "mt_EfficientNet-B0": {
+   "file": "models/mt_EfficientNet-B0.onnx",
+   "mb": 8.7,
+   "heads": [
+    "crop",
+    "disease"
+   ],
+   "epoch": 8,
+   "parity": {
+    "top1_agree": 1.0,
+    "max_abs_prob_diff": 0.002086639404296875
+   }
+  },
+  "crop_ConvNeXt-Tiny": {
+   "file": "models/crop_ConvNeXt-Tiny.onnx",
+   "mb": 55.9,
+   "heads": [
+    "crop"
+   ],
+   "epoch": 9,
+   "parity": {
+    "top1_agree": 1.0,
+    "max_abs_prob_diff": 0.0004532039165496826
+   }
+  },
+  "disease_ConvNeXt-Tiny": {
+   "file": "models/disease_ConvNeXt-Tiny.onnx",
+   "mb": 56.1,
+   "heads": [
+    "disease"
+   ],
+   "epoch": 10,
+   "parity": {
+    "top1_agree": 1.0,
+    "max_abs_prob_diff": 0.0010528564453125
+   }
+  },
+  "mt_ConvNeXt-Tiny": {
+   "file": "models/mt_ConvNeXt-Tiny.onnx",
+   "mb": 56.2,
+   "heads": [
+    "crop",
+    "disease"
+   ],
+   "epoch": 28,
+   "parity": {
+    "top1_agree": 1.0,
+    "max_abs_prob_diff": 0.000720679759979248
+   }
+  }
+ }
+}

@@ -1,0 +1,524 @@
+{
+ "Independent/ResNet50": {
+  "harmonic": {
+   "top1": 14.89,
+   "top3": 36.41,
+   "top5": 55.13
+  },
+  "test_seen": {
+   "pair": {
+    "top1": 63.85,
+    "top3": 79.4,
+    "top5": 84.65,
+    "per_class_top1": 45.23
+   },
+   "crop": {
+    "top1": 87.95,
+    "top3": 93.55,
+    "top5": 95.4,
+    "per_class_top1": 59.37
+   },
+   "disease": {
+    "top1": 65.05,
+    "top3": 79.0,
+    "top5": 83.7,
+    "per_class_top1": 44.51
+   }
+  },
+  "test_unseen": {
+   "pair": {
+    "top1": 8.43,
+    "top3": 23.62,
+    "top5": 40.88,
+    "per_class_top1": 9.5
+   },
+   "crop": {
+    "top1": 65.26,
+    "top3": 79.07,
+    "top5": 83.22,
+    "per_class_top1": 61.49
+   },
+   "disease": {
+    "top1": 8.63,
+    "top3": 21.13,
+    "top5": 27.9,
+    "per_class_top1": 15.02
+   }
+  },
+  "val": {
+   "pair": {
+    "top1": 80.85,
+    "top3": 93.66,
+    "top5": 96.12,
+    "per_class_top1": 66.89
+   },
+   "crop": {
+    "top1": 94.05,
+    "top3": 97.8,
+    "top5": 98.58,
+    "per_class_top1": 77.32
+   },
+   "disease": {
+    "top1": 82.28,
+    "top3": 93.92,
+    "top5": 95.99,
+    "per_class_top1": 67.01
+   }
+  },
+  "val_unseen": {
+   "pair": {
+    "top1": 16.3,
+    "top3": 38.77,
+    "top5": 51.98,
+    "per_class_top1": 9.76
+   },
+   "crop": {
+    "top1": 93.83,
+    "top3": 94.71,
+    "top5": 95.15,
+    "per_class_top1": 85.16
+   },
+   "disease": {
+    "top1": 15.42,
+    "top3": 23.35,
+    "top5": 33.04,
+    "per_class_top1": 9.29
+   }
+  }
+ },
+ "Multitask/ResNet50": {
+  "harmonic": {
+   "top1": 7.64,
+   "top3": 26.97,
+   "top5": 46.22
+  },
+  "test_seen": {
+   "pair": {
+    "top1": 61.75,
+    "top3": 79.8,
+    "top5": 85.25,
+    "per_class_top1": 42.72
+   },
+   "crop": {
+    "top1": 87.95,
+    "top3": 93.85,
+    "top5": 95.8,
+    "per_class_top1": 61.68
+   },
+   "disease": {
+    "top1": 63.75,
+    "top3": 81.4,
+    "top5": 85.8,
+    "per_class_top1": 44.46
+   }
+  },
+  "test_unseen": {
+   "pair": {
+    "top1": 4.07,
+    "top3": 16.23,
+    "top5": 31.7,
+    "per_class_top1": 6.68
+   },
+   "crop": {
+    "top1": 67.4,
+    "top3": 82.25,
+    "top5": 86.12,
+    "per_class_top1": 63.22
+   },
+   "disease": {
+    "top1": 7.73,
+    "top3": 17.27,
+    "top5": 27.28,
+    "per_class_top1": 16.13
+   }
+  },
+  "val": {
+   "pair": {
+    "top1": 82.28,
+    "top3": 93.53,
+    "top5": 95.73,
+    "per_class_top1": 71.19
+   },
+   "crop": {
+    "top1": 95.86,
+    "top3": 98.32,
+    "top5": 98.71,
+    "per_class_top1": 80.56
+   },
+   "disease": {
+    "top1": 82.92,
+    "top3": 94.05,
+    "top5": 96.77,
+    "per_class_top1": 69.6
+   }
+  },
+  "val_unseen": {
+   "pair": {
+    "top1": 3.08,
+    "top3": 25.55,
+    "top5": 41.85,
+    "per_class_top1": 1.67
+   },
+   "crop": {
+    "top1": 76.21,
+    "top3": 94.27,
+    "top5": 95.15,
+    "per_class_top1": 74.48
+   },
+   "disease": {
+    "top1": 12.78,
+    "top3": 24.23,
+    "top5": 29.52,
+    "per_class_top1": 6.9
+   }
+  }
+ },
+ "Independent/EfficientNet-B0": {
+  "harmonic": {
+   "top1": 14.02,
+   "top3": 35.99,
+   "top5": 52.34
+  },
+  "test_seen": {
+   "pair": {
+    "top1": 64.05,
+    "top3": 80.2,
+    "top5": 85.15,
+    "per_class_top1": 42.27
+   },
+   "crop": {
+    "top1": 89.35,
+    "top3": 93.4,
+    "top5": 94.75,
+    "per_class_top1": 62.48
+   },
+   "disease": {
+    "top1": 64.9,
+    "top3": 79.8,
+    "top5": 83.85,
+    "per_class_top1": 43.6
+   }
+  },
+  "test_unseen": {
+   "pair": {
+    "top1": 7.87,
+    "top3": 23.2,
+    "top5": 37.78,
+    "per_class_top1": 7.7
+   },
+   "crop": {
+    "top1": 67.61,
+    "top3": 77.9,
+    "top5": 81.77,
+    "per_class_top1": 63.49
+   },
+   "disease": {
+    "top1": 8.98,
+    "top3": 19.48,
+    "top5": 26.52,
+    "per_class_top1": 14.16
+   }
+  },
+  "val": {
+   "pair": {
+    "top1": 80.47,
+    "top3": 92.76,
+    "top5": 94.83,
+    "per_class_top1": 67.47
+   },
+   "crop": {
+    "top1": 96.12,
+    "top3": 98.19,
+    "top5": 98.84,
+    "per_class_top1": 80.06
+   },
+   "disease": {
+    "top1": 80.6,
+    "top3": 92.88,
+    "top5": 95.21,
+    "per_class_top1": 64.11
+   }
+  },
+  "val_unseen": {
+   "pair": {
+    "top1": 16.74,
+    "top3": 37.44,
+    "top5": 46.7,
+    "per_class_top1": 9.05
+   },
+   "crop": {
+    "top1": 88.55,
+    "top3": 94.27,
+    "top5": 94.27,
+    "per_class_top1": 81.15
+   },
+   "disease": {
+    "top1": 14.1,
+    "top3": 24.67,
+    "top5": 29.96,
+    "per_class_top1": 7.62
+   }
+  }
+ },
+ "Multitask/EfficientNet-B0": {
+  "harmonic": {
+   "top1": 2.7,
+   "top3": 16.76,
+   "top5": 35.19
+  },
+  "test_seen": {
+   "pair": {
+    "top1": 60.95,
+    "top3": 77.85,
+    "top5": 83.3,
+    "per_class_top1": 44.01
+   },
+   "crop": {
+    "top1": 86.45,
+    "top3": 93.15,
+    "top5": 95.2,
+    "per_class_top1": 61.08
+   },
+   "disease": {
+    "top1": 63.3,
+    "top3": 80.25,
+    "top5": 85.55,
+    "per_class_top1": 46.2
+   }
+  },
+  "test_unseen": {
+   "pair": {
+    "top1": 1.38,
+    "top3": 9.39,
+    "top5": 22.31,
+    "per_class_top1": 1.52
+   },
+   "crop": {
+    "top1": 62.29,
+    "top3": 77.14,
+    "top5": 81.22,
+    "per_class_top1": 57.53
+   },
+   "disease": {
+    "top1": 5.18,
+    "top3": 12.15,
+    "top5": 21.89,
+    "per_class_top1": 11.56
+   }
+  },
+  "val": {
+   "pair": {
+    "top1": 76.58,
+    "top3": 92.11,
+    "top5": 94.95,
+    "per_class_top1": 61.97
+   },
+   "crop": {
+    "top1": 94.44,
+    "top3": 97.67,
+    "top5": 98.58,
+    "per_class_top1": 79.06
+   },
+   "disease": {
+    "top1": 78.53,
+    "top3": 93.79,
+    "top5": 95.99,
+    "per_class_top1": 64.66
+   }
+  },
+  "val_unseen": {
+   "pair": {
+    "top1": 2.2,
+    "top3": 23.35,
+    "top5": 37.44,
+    "per_class_top1": 1.19
+   },
+   "crop": {
+    "top1": 70.04,
+    "top3": 88.99,
+    "top5": 91.19,
+    "per_class_top1": 68.42
+   },
+   "disease": {
+    "top1": 11.45,
+    "top3": 20.7,
+    "top5": 28.63,
+    "per_class_top1": 6.19
+   }
+  }
+ },
+ "Independent/ConvNeXt-Tiny": {
+  "harmonic": {
+   "top1": 22.42,
+   "top3": 46.98,
+   "top5": 54.0
+  },
+  "test_seen": {
+   "pair": {
+    "top1": 63.8,
+    "top3": 79.4,
+    "top5": 83.75,
+    "per_class_top1": 39.23
+   },
+   "crop": {
+    "top1": 88.95,
+    "top3": 93.75,
+    "top5": 95.35,
+    "per_class_top1": 59.94
+   },
+   "disease": {
+    "top1": 64.35,
+    "top3": 79.8,
+    "top5": 84.3,
+    "per_class_top1": 35.11
+   }
+  },
+  "test_unseen": {
+   "pair": {
+    "top1": 13.6,
+    "top3": 33.36,
+    "top5": 39.85,
+    "per_class_top1": 13.85
+   },
+   "crop": {
+    "top1": 70.23,
+    "top3": 81.28,
+    "top5": 83.98,
+    "per_class_top1": 64.69
+   },
+   "disease": {
+    "top1": 14.09,
+    "top3": 25.21,
+    "top5": 33.36,
+    "per_class_top1": 19.49
+   }
+  },
+  "val": {
+   "pair": {
+    "top1": 81.37,
+    "top3": 92.88,
+    "top5": 94.95,
+    "per_class_top1": 64.07
+   },
+   "crop": {
+    "top1": 95.73,
+    "top3": 98.06,
+    "top5": 98.71,
+    "per_class_top1": 77.66
+   },
+   "disease": {
+    "top1": 81.24,
+    "top3": 92.76,
+    "top5": 95.47,
+    "per_class_top1": 59.05
+   }
+  },
+  "val_unseen": {
+   "pair": {
+    "top1": 16.74,
+    "top3": 39.21,
+    "top5": 44.93,
+    "per_class_top1": 9.05
+   },
+   "crop": {
+    "top1": 88.55,
+    "top3": 94.71,
+    "top5": 95.15,
+    "per_class_top1": 80.73
+   },
+   "disease": {
+    "top1": 16.3,
+    "top3": 23.79,
+    "top5": 27.31,
+    "per_class_top1": 9.96
+   }
+  }
+ },
+ "Multitask/ConvNeXt-Tiny": {
+  "harmonic": {
+   "top1": 7.89,
+   "top3": 21.5,
+   "top5": 33.51
+  },
+  "test_seen": {
+   "pair": {
+    "top1": 63.25,
+    "top3": 79.65,
+    "top5": 83.95,
+    "per_class_top1": 40.42
+   },
+   "crop": {
+    "top1": 88.75,
+    "top3": 94.05,
+    "top5": 95.8,
+    "per_class_top1": 64.09
+   },
+   "disease": {
+    "top1": 65.55,
+    "top3": 81.35,
+    "top5": 85.45,
+    "per_class_top1": 44.66
+   }
+  },
+  "test_unseen": {
+   "pair": {
+    "top1": 4.21,
+    "top3": 12.43,
+    "top5": 20.93,
+    "per_class_top1": 4.43
+   },
+   "crop": {
+    "top1": 62.5,
+    "top3": 76.45,
+    "top5": 81.08,
+    "per_class_top1": 59.13
+   },
+   "disease": {
+    "top1": 12.02,
+    "top3": 18.58,
+    "top5": 23.76,
+    "per_class_top1": 16.7
+   }
+  },
+  "val": {
+   "pair": {
+    "top1": 83.18,
+    "top3": 94.57,
+    "top5": 96.25,
+    "per_class_top1": 67.51
+   },
+   "crop": {
+    "top1": 94.95,
+    "top3": 98.19,
+    "top5": 99.09,
+    "per_class_top1": 77.54
+   },
+   "disease": {
+    "top1": 84.99,
+    "top3": 95.86,
+    "top5": 97.67,
+    "per_class_top1": 70.47
+   }
+  },
+  "val_unseen": {
+   "pair": {
+    "top1": 2.64,
+    "top3": 16.3,
+    "top5": 30.84,
+    "per_class_top1": 1.43
+   },
+   "crop": {
+    "top1": 78.85,
+    "top3": 91.63,
+    "top5": 94.71,
+    "per_class_top1": 75.7
+   },
+   "disease": {
+    "top1": 8.81,
+    "top3": 16.3,
+    "top5": 21.15,
+    "per_class_top1": 4.76
+   }
+  }
+ }
+}
