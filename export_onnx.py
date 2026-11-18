@@ -13,7 +13,7 @@ so pair scoring is identical for both approaches:
     pair_score[comp] = log p(crop[comp]) + log p(disease[comp])     (333 comps)
 
 Evaluation runs the exported ONNX files (what the page runs), not PyTorch, on
-val / val_unseen / test_seen / test_unseen, and stores metrics + sparse confusion matrices.
+val / val_unseen / test_seen / test_unseen, and stores metrics per head (summary.json).
 A parity check compares ONNX with PyTorch on a batch of test images first.
 """
 
@@ -37,7 +37,8 @@ DATA = ROOT / "DPD_Small_clean_v2"
 WEB = ROOT / "web"
 MEAN, STD = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
 SIZE = 224
-BACKBONES = ["ResNet50", "EfficientNet-B0", "ConvNeXt-Tiny"]
+# ponytail: GUI shows ConvNeXt-Tiny only (best baseline backbone); add names here to bring others back.
+BACKBONES = ["ConvNeXt-Tiny"]
 SPLITS = {"test_seen": "test_seen.csv", "test_unseen": "test_unseen.csv", "val": "val.csv", "val_unseen": "val_unseen.csv"}
 
 # file stem -> checkpoint path
@@ -164,12 +165,7 @@ def metrics(scores, y, ks=(1, 3, 5)):
     m = {f"top{k}": round(float(hit[:, :k].any(1).mean() * 100), 2) for k in ks}
     pred = top[:, 0]
     m["per_class_top1"] = round(float(np.mean([(pred[y == c] == c).mean() for c in np.unique(y)]) * 100), 2)
-    return m, pred
-
-
-def sparse_cm(y, pred):
-    pairs, counts = np.unique(np.stack([y, pred], 1), axis=0, return_counts=True)
-    return [[int(a), int(b), int(c)] for (a, b), c in zip(pairs, counts)]
+    return m
 
 
 def evaluate(maps, cd):
@@ -195,11 +191,7 @@ def evaluate(maps, cd):
             pair = lc[:, cd[:, 0]] + ld[:, cd[:, 1]]
             y = {"pair": df.comp_id.values, "crop": df.crop_id.values, "disease": df.disease_id.values}
             sc = {"pair": pair, "crop": lc, "disease": ld}
-            r[split] = {"n": len(df), "metrics": {}, "cm": {}}
-            for h in ("pair", "crop", "disease"):
-                m, pred = metrics(sc[h], y[h])
-                r[split]["metrics"][h] = m
-                r[split]["cm"][h] = sparse_cm(y[h], pred)
+            r[split] = {"n": len(df), "metrics": {h: metrics(sc[h], y[h]) for h in ("pair", "crop", "disease")}}
         hm = lambda a, b: round(2 * a * b / (a + b), 2) if a + b else 0.0
         r["harmonic"] = {k: hm(r["test_seen"]["metrics"]["pair"][k], r["test_unseen"]["metrics"]["pair"][k])
                          for k in ("top1", "top3", "top5")}
@@ -253,13 +245,9 @@ def main():
     }
     (WEB / "meta.json").write_text(json.dumps(meta))
     info_path.write_text(json.dumps({"files": files}, indent=1))
-    (WEB / "results").mkdir(exist_ok=True)
-    summary = {}
-    for opt, r in results.items():
-        (WEB / "results" / f"{opt.replace('/', '_')}.json").write_text(json.dumps(r, separators=(",", ":")))
-        summary[opt] = {"harmonic": r["harmonic"], **{s: r[s]["metrics"] for s in SPLITS}}
+    summary = {opt: {"harmonic": r["harmonic"], **{s: r[s]["metrics"] for s in SPLITS}} for opt, r in results.items()}
     (WEB / "summary.json").write_text(json.dumps(summary, indent=1))
-    print("wrote web/meta.json, web/models.json, web/summary.json, web/results/, web/examples/")
+    print("wrote web/meta.json, web/models.json, web/summary.json, web/examples/")
 
 
 if __name__ == "__main__":

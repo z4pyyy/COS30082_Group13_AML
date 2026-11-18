@@ -9,7 +9,6 @@
 const $ = (id) => document.getElementById(id);
 let meta, summary, files;           // meta.json, summary.json, models.json
 let option = null;                  // "Independent/ResNet50" etc.
-let results = null;                 // results/<option>.json
 let backend = "";
 let lastImg = null;                 // { img, truth } to re-run on model change
 let last = null;                    // { crop, cams, ch, cw, top }
@@ -70,7 +69,7 @@ async function init() {
     renderExamples();
     renderCompare();
     const fromHash = decodeURIComponent(location.hash.slice(1));
-    await selectOption(meta.options[fromHash] ? fromHash : "Multitask/EfficientNet-B0");
+    await selectOption(meta.options[fromHash] ? fromHash : Object.keys(meta.options)[0]);
   } catch (e) {
     status(`Could not load: ${e.message}`);
     console.error(e);
@@ -85,11 +84,7 @@ async function selectOption(opt) {
   history.replaceState(null, "", `#${encodeURIComponent(opt)}`);
   for (const tr of $("cmp").querySelectorAll("tbody tr")) tr.classList.toggle("sel", tr.dataset.opt === opt);
   $("predModel").textContent = `· ${opt}`;
-  $("cmModel").textContent = opt;
   renderStats();
-  results = await fetch(`results/${opt.replace("/", "_")}.json`).then((r) => r.json());
-  if (opt !== option) return;                       // user switched again meanwhile
-  renderCM();
   try {
     for (const s of meta.options[opt]) await getSession(s);
     status(null);
@@ -260,60 +255,5 @@ function drawView() {
 }
 ["camOn", "camHead"].forEach((id) => $(id).addEventListener("change", drawView));
 $("camAlpha").addEventListener("input", drawView);
-
-// ---------------------------------------------------------------- confusion matrix
-let cmState = null;   // { ids, cells: Map("r,c" -> count), rowSum, names }
-
-function renderCM() {
-  const head = $("cmHead").value, split = $("cmSplit").value;
-  const names = head === "pair" ? meta.comp : meta[head];
-  const r = results[split], cm = r.cm[head], m = r.metrics[head];
-  $("cmMetrics").innerHTML = [["Top-1", m.top1], ["Top-3", m.top3], ["Top-5", m.top5], ["Per-class top-1", m.per_class_top1]]
-    .map(([k, v]) => `<span><b>${pct(v)}</b> ${k}</span>`).join("") + `<span><b>${r.n}</b> images</span>`;
-
-  const ids = [...new Set(cm.flatMap(([t, p]) => [t, p]))].sort((a, b) => a - b);
-  const idx = new Map(ids.map((id, i) => [id, i]));
-  const rowSum = new Map();
-  for (const [t, , c] of cm) rowSum.set(t, (rowSum.get(t) || 0) + c);
-  cmState = { ids, idx, cm, rowSum, names, cells: new Map(cm.map(([t, p, c]) => [`${t},${p}`, c])) };
-
-  const cv = $("cm"), ctx = cv.getContext("2d"), n = ids.length, W = cv.width, cs = W / n;
-  const css = getComputedStyle(document.documentElement);
-  ctx.fillStyle = css.getPropertyValue("--card"); ctx.fillRect(0, 0, W, W);
-  const norm = $("cmNorm").checked;
-  const maxC = Math.max(...cm.map(([, , c]) => c));
-  const [ar, ag, ab] = hexRgb(css.getPropertyValue("--accent").trim());
-  const [er, eg, eb] = hexRgb(css.getPropertyValue("--bad").trim());
-  for (const [t, p, c] of cm) {
-    const v = norm ? c / rowSum.get(t) : Math.sqrt(c / maxC);
-    const [rr, gg, bb] = t === p ? [ar, ag, ab] : [er, eg, eb];
-    ctx.fillStyle = `rgba(${rr},${gg},${bb},${0.35 + 0.65 * v})`;
-    ctx.fillRect(idx.get(p) * cs, idx.get(t) * cs, Math.max(cs, 1.5), Math.max(cs, 1.5));
-  }
-  $("cmTop").innerHTML = cm.filter(([t, p]) => t !== p).sort((a, b) => b[2] - a[2]).slice(0, 10)
-    .map(([t, p, c]) => `<li>${nice(names[t])} → ${nice(names[p])} <span>×${c} (${(100 * c / rowSum.get(t)).toFixed(0)}% of row)</span></li>`)
-    .join("") || "<li>No confusions.</li>";
-}
-function hexRgb(h) {
-  if (h.length === 4) h = "#" + [...h.slice(1)].map((x) => x + x).join("");
-  return [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
-}
-["cmHead", "cmSplit", "cmNorm"].forEach((id) => $(id).addEventListener("change", () => results && renderCM()));
-window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => results && renderCM());
-
-$("cm").addEventListener("mousemove", (e) => {
-  if (!cmState) return;
-  const cv = $("cm"), rect = cv.getBoundingClientRect(), n = cmState.ids.length;
-  const col = Math.floor(((e.clientX - rect.left) / rect.width) * n), row = Math.floor(((e.clientY - rect.top) / rect.height) * n);
-  if (col < 0 || row < 0 || col >= n || row >= n) return ($("cmTip").hidden = true);
-  const t = cmState.ids[row], p = cmState.ids[col], c = cmState.cells.get(`${t},${p}`) || 0, rs = cmState.rowSum.get(t) || 0;
-  const tip = $("cmTip");
-  tip.innerHTML = `True: <b>${nice(cmState.names[t])}</b><br>Pred: <b>${nice(cmState.names[p])}</b><br>${c} image(s)${rs ? ` · ${(100 * c / rs).toFixed(0)}% of row (${rs})` : " · class not in this split"}`;
-  tip.hidden = false;
-  const x = e.clientX - rect.left + 14, y = e.clientY - rect.top + 14;
-  tip.style.left = `${Math.min(x, rect.width - tip.offsetWidth)}px`;
-  tip.style.top = `${y}px`;
-});
-$("cm").addEventListener("mouseleave", () => ($("cmTip").hidden = true));
 
 init();
