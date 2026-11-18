@@ -107,8 +107,8 @@ th{color:var(--mut);font-weight:600}
 <tr><th>Item</th><th>Decision</th></tr>
 <tr><td>Runtime</td><td>Static ONNX in browser, lazy load selected model only, browser cache</td></tr>
 <tr><td>Host</td><td><code>web/</code> in this repo, GitHub Action → Pages on push to <code>master</code></td></tr>
-<tr><td>Models</td><td>6 baselines now (Independent × 3, Multitask × 3); new approach later</td></tr>
-<tr><td>Extras</td><td>Grad-CAM, compare-all table, seen/unseen example buttons. No training curves.</td></tr>
+<tr><td>Models</td><td>2026-11-19 update: ConvNeXt-Tiny only (Independent, Multitask). New approach = extra Backbone option later. ResNet50 / EfficientNet-B0 removed from GUI (results stay in report).</td></tr>
+<tr><td>Extras</td><td>Grad-CAM, compare table, seen/unseen example buttons. Confusion matrix removed from GUI (hard to read); it goes in the report.</td></tr>
 <tr><td>Blue-green rule</td><td>Skipped: static demo, no DB, one host</td></tr>
 <tr><td>Env</td><td>New <code>.venv</code> (torch, timm, onnx, onnxruntime) for export only</td></tr>
 </table>
