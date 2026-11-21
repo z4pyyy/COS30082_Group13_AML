@@ -1,0 +1,11 @@
+,apple_mosaic_virus,apple_venturia_inaequalis,pepper_bell_bacterial_spot,pepper_bell_healthy,blueberry_botrytis_blight,cassava_mosaic,cherry_aphis_spp,citrus_canker,coffee_berry_blotch,corn_brown_spot,corn_leaf_blight,corn_spot,corn_streak,corn_yellowing,cotton_bacterial_blight,cotton_target_spot,cucumber_downy_mildew,cucumber_powdery_mildew,grape_black_rot,grape_esca,grape_leaf_blight,corn_streak_virus,mango_anthracnose,mango_gall_midge,olive_peacock_spot,peach_curl,pear_spot,potato_late_blight,squash_powdery_mildew,sugarcane_red_rot,sugarcane_rust,sugarcane_yellowing,tomato_bacterial_spot,tomato_early_blight,tomato_healthy,tomato_late_blight,tomato_leaf_blight,tomato_leaf_mold,tomato_septoria_leaf_spot,tomato_spider_mites,tomato_target_spot,tomato_verticulium_wilt,walnut_gnomonia_leptostyla,zucchini_powdery_mildew
+pepper_bell_bacterial_spot,0,0,162,4,0,0,0,1,0,1,0,0,0,1,4,0,4,2,1,0,0,0,5,0,0,4,8,3,0,0,0,0,0,13,0,0,7,0,0,0,0,0,0,0
+cherry_aphis_spp,11,2,5,0,0,0,10,0,0,8,0,0,0,5,0,0,0,9,1,0,0,0,0,0,0,4,6,0,0,0,4,0,0,6,0,0,0,0,0,0,0,0,1,0
+corn_brown_spot,0,0,3,0,0,0,3,0,0,3,2,2,2,1,1,0,2,0,1,0,0,2,1,0,0,4,3,0,0,0,2,0,0,0,0,0,3,0,0,0,0,0,0,0
+cotton_bacterial_blight,0,0,4,0,0,0,3,0,0,3,0,0,0,6,64,3,0,0,13,0,0,0,11,0,0,1,4,0,0,0,0,0,0,10,0,0,3,0,0,0,0,0,0,0
+cucumber_downy_mildew,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,24,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+cucumber_powdery_mildew,0,0,0,0,0,0,0,0,0,1,0,0,0,0,2,0,3,15,1,0,0,0,1,0,0,2,0,0,7,0,1,0,0,1,0,0,1,0,0,0,0,0,0,2
+grape_black_rot,10,0,2,0,1,0,12,0,1,1,0,0,0,4,1,1,20,4,61,102,1,0,22,0,0,1,2,0,0,0,1,0,0,18,0,0,6,0,0,0,0,0,0,0
+mango_anthracnose,0,0,19,0,0,0,0,0,0,10,0,0,0,0,4,0,0,0,0,0,0,0,14,24,1,18,0,2,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0
+sugarcane_rust,5,0,0,0,0,0,3,0,0,7,0,0,0,1,4,0,0,0,0,0,0,0,1,0,0,1,0,0,0,6,57,1,0,0,0,0,3,0,0,0,0,0,0,0
+tomato_early_blight,2,0,43,0,0,1,10,0,0,5,0,0,0,14,3,0,15,4,4,0,0,0,26,0,0,2,4,46,0,0,1,0,16,102,1,35,66,3,51,2,15,1,0,0

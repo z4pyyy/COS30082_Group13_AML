@@ -1,0 +1,93 @@
+{
+  "aug_views": 2,
+  "epochs": 30,
+  "patience": 10,
+  "batch_size": 64,
+  "seed": 42,
+  "lr": 0.001,
+  "weight_decay": 0.05,
+  "label_smooth": 0.1,
+  "emb_dim": 512,
+  "hidden": 1024,
+  "dropout": 0.3,
+  "word_dim": 300,
+  "tau": 0.05,
+  "lambda_hal": 1.0,
+  "hal_unseen_frac": 0.5,
+  "pair_emb": "learned",
+  "limit_batches": 0,
+  "fusion_ws": [
+    0.0,
+    0.05,
+    0.1,
+    0.2,
+    0.3,
+    0.5,
+    1.0
+  ],
+  "data": "D:\\DPD\\DPD_Small_clean_v2",
+  "crop_ckpt": "D:\\DPD\\checkpoints\\ConvNeXt-Tiny_crop.pt",
+  "disease_ckpt": "D:\\DPD\\checkpoints\\ConvNeXt-Tiny_disease.pt",
+  "out": "D:\\DPD\\output\\zsl_final",
+  "cache": "D:\\DPD\\zsl_features",
+  "workers": 0,
+  "track": "zsl_independent_v2 (new approach, step 2: frozen team models + zero-shot learning head ZSLHead + late fusion ZSLFusion)",
+  "dataset": "DPD_Small_clean_v2",
+  "protocol": "best epoch = max H(val Top-1, val_unseen Top-1), pair level",
+  "backbones": {
+    "crop": {
+      "timm_id": "convnext_tiny.fb_in1k",
+      "num_classes": 55,
+      "task": "crop",
+      "epoch": 9,
+      "val_H": 91.99852945200689,
+      "val_top1": 95.73091864585876,
+      "val_unseen_top1": 88.54625821113586,
+      "dataset": "DPD_Small_clean_v2",
+      "sha256": "2980a866301ced2fab3d3f9df86643434e09e735a68538b23d64d009cf0daa44",
+      "file": "ConvNeXt-Tiny_crop.pt"
+    },
+    "disease": {
+      "timm_id": "convnext_tiny.fb_in1k",
+      "num_classes": 175,
+      "task": "disease",
+      "epoch": 10,
+      "val_H": 27.158894392213714,
+      "val_top1": 81.37128353118896,
+      "val_unseen_top1": 16.29955917596817,
+      "dataset": "DPD_Small_clean_v2",
+      "sha256": "c18c6bbd8cb46afc4d78d5b3ad4a949024c21c808b92f4775b6898b8dd63d808",
+      "file": "ConvNeXt-Tiny_disease.pt"
+    }
+  },
+  "optimizer": "AdamW",
+  "schedule": "OneCycleLR pct_start=0.1",
+  "loss": "CE(real) + lambda_hal * CE(hallucinated)",
+  "scoring": "cosine(composed image feature, pair embedding) / tau over all 333 pairs",
+  "calibration": "bias subtracted from train pairs, tuned on val + val_unseen (max H), never on test",
+  "late_fusion": "Product + w * ZSLHead, w from fusion_ws and its own bias tuned on val + val_unseen (max H), ties to the smaller w, never on test",
+  "deterministic": {
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "cudnn_deterministic": true,
+    "cudnn_benchmark": false,
+    "deterministic_algorithms": true
+  },
+  "hallucination_pool": {
+    "pairs": 333,
+    "pairs_without_train_images": 16,
+    "skipped": []
+  },
+  "changes_from_shared_protocol": [
+    "backbones are the team's crop and disease ConvNeXt-Tiny checkpoints, frozen (no new backbone training)",
+    "the head trains on cached features: lr 1e-3 for the head (backbone lr 1e-4 does not apply)",
+    "train features = 1 clean pass + 2 passes with the loader's own train augmentation",
+    "hallucinated features for pairs without training images use only the pair names in label_maps.json"
+  ],
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "versions": {
+    "python": "3.13.15",
+    "torch": "2.11.0+cu128",
+    "timm": "1.0.31"
+  }
+}
