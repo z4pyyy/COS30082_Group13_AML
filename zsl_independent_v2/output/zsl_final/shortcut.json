@@ -1,0 +1,38 @@
+{
+  "meaning": "wrong unseen (test_unseen) disease answers that are a disease seen on the true crop in train",
+  "disease model alone": {
+    "wrong": 1244,
+    "disease_seen_on_true_crop": 770,
+    "share_%": 61.89710610932476
+  },
+  "Product": {
+    "wrong": 1208,
+    "disease_seen_on_true_crop": 894,
+    "share_%": 74.00662251655629
+  },
+  "Product-calib": {
+    "wrong": 627,
+    "disease_seen_on_true_crop": 243,
+    "share_%": 38.75598086124402
+  },
+  "ZSLHead": {
+    "wrong": 1201,
+    "disease_seen_on_true_crop": 826,
+    "share_%": 68.77601998334721
+  },
+  "ZSLHead-calib": {
+    "wrong": 927,
+    "disease_seen_on_true_crop": 437,
+    "share_%": 47.14131607335491
+  },
+  "ZSLFusion": {
+    "wrong": 1200,
+    "disease_seen_on_true_crop": 872,
+    "share_%": 72.66666666666667
+  },
+  "ZSLFusion-calib": {
+    "wrong": 607,
+    "disease_seen_on_true_crop": 228,
+    "share_%": 37.56177924217463
+  }
+}
