@@ -14,6 +14,7 @@ Example: python v3_disease/train.py --task disease --attn --adv 0.3 --synth --fi
 import argparse
 import copy
 import math
+import os
 import time
 
 import pandas as pd
@@ -131,7 +132,10 @@ _LOADERS = {}
 
 
 def eval_loader(split, df, tf, workers):
-    """One persistent eval loader per split. On Windows every new loader re-spawns its workers (slow)."""
+    """One eval loader per split, kept for the whole run. On Windows each worker process re-imports torch
+    (about a minute per loader), which costs more than decoding the eval images in the main process."""
+    if os.name == "nt":
+        workers = 0
     if split not in _LOADERS:
         _LOADERS[split] = DataLoader(Frame(df, tf), batch_size=128, num_workers=workers,
                                      persistent_workers=workers > 0, pin_memory=torch.cuda.is_available())
