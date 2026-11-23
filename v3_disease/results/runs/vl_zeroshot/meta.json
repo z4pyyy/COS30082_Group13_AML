@@ -1,0 +1,16 @@
+{
+  "name": "vl_s0",
+  "model": "hf-hub:imageomics/bioclip-2",
+  "epochs": 0,
+  "bs": 48,
+  "lr": 1e-05,
+  "blocks": 6,
+  "seed": 0,
+  "workers": 8,
+  "max_batches": 0,
+  "task": "disease",
+  "val acc": 2.5873221457004547,
+  "val_unseen acc": 0.0,
+  "test_seen acc": 2.800000086426735,
+  "test_unseen acc": 2.4171270430088043
+}

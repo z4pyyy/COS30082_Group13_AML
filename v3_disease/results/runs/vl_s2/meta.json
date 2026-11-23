@@ -1,0 +1,18 @@
+{
+  "name": "vl_s2",
+  "model": "hf-hub:imageomics/bioclip-2",
+  "epochs": 10,
+  "bs": 48,
+  "lr": 1e-05,
+  "blocks": 6,
+  "seed": 2,
+  "workers": 8,
+  "max_batches": 0,
+  "task": "disease",
+  "best epoch": 1,
+  "val H": 26.7778891419359,
+  "val acc": 66.88227653503418,
+  "val_unseen acc": 16.740088164806366,
+  "test_seen acc": 52.35000252723694,
+  "test_unseen acc": 10.9806627035141
+}
