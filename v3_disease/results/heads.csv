@@ -1,0 +1,23 @@
+run,task,best epoch,val acc,val_unseen acc,test_seen acc,test_unseen acc,test field acc,test lab acc
+crop_s0,crop,13.0,98.45,96.04,95.5,86.95,79.86,94.92
+crop_s1,crop,9.0,98.32,95.15,94.9,86.19,77.39,94.71
+crop_s2,crop,7.0,97.93,96.04,94.4,85.15,77.54,93.76
+dis_attn_adv_s0,disease,4.0,79.17,22.47,65.9,7.04,23.77,45.54
+dis_attn_adv_s1,disease,6.0,81.63,22.03,65.15,9.05,21.3,46.66
+dis_attn_adv_s2,disease,15.0,85.77,25.99,68.9,9.94,24.35,49.09
+dis_attn_adv_syn_s0,disease,13.0,84.09,24.67,68.0,12.91,22.75,50.4
+dis_attn_adv_syn_s1,disease,15.0,83.96,24.23,67.0,15.47,23.19,50.91
+dis_attn_adv_syn_s2,disease,7.0,79.82,26.43,67.5,15.06,22.46,51.23
+dis_attn_s0,disease,11.0,86.29,23.35,72.4,8.36,26.96,50.15
+dis_attn_s1,disease,8.0,86.93,24.23,72.0,7.94,25.07,50.11
+dis_attn_s2,disease,9.0,87.58,24.67,72.25,7.73,26.09,49.93
+dis_base_s0,disease,7.0,87.32,18.5,71.75,8.77,25.22,50.33
+dis_base_s1,disease,14.0,87.84,13.66,73.9,9.19,26.96,51.67
+dis_base_s2,disease,7.0,87.45,19.82,70.55,8.15,23.62,49.53
+dis_full_s0,disease,5.0,74.51,25.55,63.15,11.6,24.06,45.87
+dis_full_s1,disease,3.0,71.41,29.07,62.15,13.54,26.23,45.61
+dis_full_s2,disease,2.0,69.99,27.75,60.35,7.8,22.75,42.17
+vl_s0,disease,3.0,79.04,18.06,64.45,15.68,,
+vl_s1,disease,4.0,80.21,16.74,65.9,13.47,,
+vl_s2,disease,1.0,66.88,16.74,52.35,10.98,,
+vl_zeroshot,disease,,2.59,0.0,2.8,2.42,,
