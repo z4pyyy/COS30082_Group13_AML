@@ -127,11 +127,22 @@ def build_train_df(L: Labels, task: str, synth: bool) -> pd.DataFrame:
     return tr
 
 
+_LOADERS = {}
+
+
+def eval_loader(split, df, tf, workers):
+    """One persistent eval loader per split. On Windows every new loader re-spawns its workers (slow)."""
+    if split not in _LOADERS:
+        _LOADERS[split] = DataLoader(Frame(df, tf), batch_size=128, num_workers=workers,
+                                     persistent_workers=workers > 0, pin_memory=torch.cuda.is_available())
+    return _LOADERS[split]
+
+
 @torch.no_grad()
 def predict(model, L, split, task, dev, bs, workers, amp):
     df = L.dfs[split].copy()
     df["abs"], df["adv_mask"] = [str(DATA / p) for p in df.path], False
-    dl = DataLoader(Frame(df, tf_eval()), batch_size=bs, num_workers=workers)
+    dl = eval_loader(split, df, tf_eval(), workers)
     model.eval()
     out = []
     for x, *_ in dl:

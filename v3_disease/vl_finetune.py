@@ -8,6 +8,8 @@ Epoch 0 (no training) is also saved as the zero-shot reference run.
 
 Run: python v3_disease/vl_finetune.py --seed 0 --name vl_s0
 """
+from __future__ import annotations
+
 import argparse
 import copy
 import json
@@ -20,7 +22,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 from common import DATA, EV, H, HERE, RESULTS, Labels, device, save_logits, write_json
-from train import Frame, build_train_df, tf_eval, tf_train
+from train import Frame, build_train_df, eval_loader, tf_eval, tf_train
 
 CLIP_MEAN, CLIP_STD = (0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711)
 FIX = {"segatoka": "sigatoka", "xamthomonas": "xanthomonas", "crinckle": "crinkle", "monillia laxa": "monilinia laxa",
@@ -54,7 +56,7 @@ def text_bank(model, tok, L, dev):
 def predict(model, T, scale, L, split, dev, workers, amp):
     df = L.dfs[split].copy()
     df["abs"], df["adv_mask"] = [str(DATA / p) for p in df.path], False
-    dl = DataLoader(Frame(df, tf_eval(CLIP_MEAN, CLIP_STD)), batch_size=128, num_workers=workers)
+    dl = eval_loader(split, df, tf_eval(CLIP_MEAN, CLIP_STD), workers)
     model.eval()
     out = []
     for x, *_ in dl:
