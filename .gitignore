@@ -24,3 +24,9 @@ multitask_cnn/dataset/
 
 # ONNX of models not shown in the GUI (export_onnx.py)
 build/
+
+# v3_disease: generated images, smoke runs, weights (results/ IS committed)
+v3_disease/synthetic/
+v3_disease/synthetic_smoke/
+v3_disease/results_smoke/
+v3_disease/weights/
