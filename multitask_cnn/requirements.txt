@@ -1,7 +1,0 @@
-torch>=2.1
-torchvision>=0.16
-pandas
-numpy
-scikit-learn
-matplotlib
-pillow

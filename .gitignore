@@ -1,6 +1,6 @@
-# Data: share by Drive/zip, not git
+# Data: share by Drive/Kaggle, not git
 DPD_Small/
-DPD_Small_clean/images/
+DPD_Small_clean/
 *.7z
 *.zip
 
@@ -9,24 +9,32 @@ __pycache__/
 *.pyc
 .venv/
 
-# Training outputs
+# Training outputs and weights
 checkpoints/
 runs/
 *.pt
 *.pth
+2_Baselines/Multitask_CNN/dataset/
+build/
 
-# v2 dataset build output (upload to Kaggle, not git)
-DPD_Small_clean_v2/
-multitask_cnn/dataset/
+# DINO-CPS: generated images, smoke runs, weights (results/ IS committed)
+3_Final_New_Approach/training/synthetic/
+3_Final_New_Approach/training/synthetic_smoke/
+3_Final_New_Approach/training/results_smoke/
+3_Final_New_Approach/training/weights/
+
+# HF Space build output and weights (uploaded to the Space, not git)
+3_Final_New_Approach/gui/static/models/
+3_Final_New_Approach/gui/weights/
+3_Final_New_Approach/gui/static/data/
+3_Final_New_Approach/gui/static/examples/
+3_Final_New_Approach/gui/static/gallery/
+
+# Report build intermediates
+Report/node_modules/
 
 # macOS
 .DS_Store
 
-# ONNX of models not shown in the GUI (export_onnx.py)
-build/
-
-# v3_disease: generated images, smoke runs, weights (results/ IS committed)
-v3_disease/synthetic/
-v3_disease/synthetic_smoke/
-v3_disease/results_smoke/
-v3_disease/weights/
+# Office lock files
+~$*

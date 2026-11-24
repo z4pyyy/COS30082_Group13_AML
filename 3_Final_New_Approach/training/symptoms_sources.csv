@@ -1,0 +1,73 @@
+disease,description,status,sources,note,urls
+healthy,"a uniformly green leaf with no spots, lesions or discoloration",supported,,no disease claim; reference description of a symptom-free leaf,
+rust,"small orange to reddish-brown powdery pustules, mostly on the leaf underside",supported,S56,,https://ipm.ucanr.edu/home-and-landscape/rusts/
+common_rust,small cinnamon-brown powdery pustules scattered on both leaf surfaces,supported,S1,,https://extension.umn.edu/corn-pest-management/common-rust-corn
+brown_rust,small round orange-brown powdery pustules scattered on the leaf,supported,S2,wheat leaf (brown) rust,https://extension.okstate.edu/fact-sheets/identifying-rust-diseases-of-wheat-and-barley
+yellow_rust,yellow powdery pustules arranged in stripes along the leaf,supported,S2;S3,,https://extension.okstate.edu/fact-sheets/identifying-rust-diseases-of-wheat-and-barley https://extension.arizona.edu/sites/extension.arizona.edu/files/pubs/az1755-2018.pdf
+stripe_rust,yellow powdery pustules arranged in long stripes between the veins,supported,S3,,https://extension.arizona.edu/sites/extension.arizona.edu/files/pubs/az1755-2018.pdf
+bean_rust,small reddish-brown powdery pustules with yellow halos,supported,S4,,https://www.umass.edu/agriculture-food-environment/vegetable/fact-sheets/bean-rust
+cedar_apple_rust,bright yellow-orange spots with tiny black dots in the centre,supported,S5,,https://extension.umn.edu/plant-diseases/cedar-apple-rust
+red_rust,raised orange-red velvety spots on the leaf surface,supported,S6,algal red rust (Cephaleuros virescens),https://www.ctahr.hawaii.edu/uhmg/FAQ/faq-algal-lfspot.asp
+powdery_mildew,white to grey powdery fungal growth on the leaf surface,supported,S7,,https://ipm.ucanr.edu/PMG/PESTNOTES/pn7406.html
+mildew,white or grey fungal growth on the leaf surface,supported,S7,,https://ipm.ucanr.edu/PMG/PESTNOTES/pn7406.html
+downy_mildew,yellow angular patches on top and grey-purple fuzzy growth underneath,supported,S8,,https://u.osu.edu/vegetablediseasefacts/?p=227
+anthracnose,"dark sunken irregular lesions with brown margins, dead leaf tips and edges",partial,S9,dark sunken lesions with darker borders supported; tip and edge dieback is host-dependent,https://byf.unl.edu/anthracnose
+brown_spot,"round brown spots, often with a yellow halo",supported,S10,rice brown spot,https://ipm.ifas.ufl.edu/pdfs/RH00700.pdf
+spot,small round brown or black spots on the leaf,supported,S11,generic leaf spot,https://www.uky.edu/Ag/Entomology/PSEP/11pests1disease.html
+bacterial_spot,"small dark water-soaked spots that turn brown, with yellow halos",supported,S12,,https://www.aces.edu/blog/topics/crop-production/bacterial-spot-of-tomato-and-pepper/
+bacterial_leaf_spot,"small dark water-soaked spots that turn brown, with yellow halos",supported,S12,,https://www.aces.edu/blog/topics/crop-production/bacterial-spot-of-tomato-and-pepper/
+black_rot,brown to black dead lesions with dark margins and yellowing,partial,S13,brown lesions with dark margins supported; yellowing not stated,https://extension.psu.edu/grape-disease-black-rot
+black_spot,round black spots with feathery edges and yellowing around them,supported,S14,,https://extension.illinois.edu/plant-problems/black-spot
+leaf_blight,large brown dead areas spreading from the leaf edges or tips,partial,S11,blights = large irregular dead areas; spread from edges/tips not stated,https://www.uky.edu/Ag/Entomology/PSEP/11pests1disease.html
+blight_leaf,large brown dead areas spreading from the leaf edges or tips,partial,S11,as leaf_blight,https://www.uky.edu/Ag/Entomology/PSEP/11pests1disease.html
+alternaria_leaf_spot,brown spots with concentric rings and a yellow halo,supported,S15,,https://vegetables.cornell.edu/pest-management/disease-factsheets/alternaria-leaf-spot-of-brassicas
+alternaria_leaf_blight,brown spots with concentric rings that merge into large dead areas,supported,S16,,https://extension.umn.edu/disease-management/alternaria-leaf-blight
+alternaria_blotch,small round brown blotches with darker borders,supported,S17,,https://www.canr.msu.edu/ipm/diseases/alternaria_blotch
+early_blight,brown spots with concentric target-like rings and yellow surrounding tissue,supported,S18,,https://extension.okstate.edu/programs/digital-diagnostics/plant-diseases/early-blight-of-tomato
+late_blight,large dark water-soaked lesions with pale green edges and white mould underneath,supported,S19,,https://extension.usu.edu/vegetableguide/tomato-pepper-eggplant/late-blight
+target_spot,brown spots with concentric rings like a target,supported,S20,,https://edis.ifas.ufl.edu/publication/PP351
+mosaic_virus,"mottled light green, dark green and yellow patches with distorted leaves",supported,S21,,https://hortsense.cahnrs.wsu.edu/fact-sheet/pepper-eggplant-mosaic-viruses/
+mosaic,"mottled light green, dark green and yellow patches with distorted leaves",supported,S21,,https://hortsense.cahnrs.wsu.edu/fact-sheet/pepper-eggplant-mosaic-viruses/
+yellow_mosaic,bright yellow and green mosaic patches,supported,S22,,https://agritech.tnau.ac.in/crop_protection/green_gram_disease/yellow_mosaic.html
+yellow_mosaic_virus,bright yellow and green mosaic patches,supported,S22,source is for mungbean yellow mosaic; the DPD class is on zucchini,https://agritech.tnau.ac.in/crop_protection/green_gram_disease/yellow_mosaic.html
+curl,"leaves curled, puckered and thickened, often reddish or yellow",supported,S23,peach leaf curl,https://extension.psu.edu/peach-disease-peach-leaf-curl
+curl_virus,"leaves curled upward, crinkled and yellowed",supported,S24,,https://ipm.ucanr.edu/agriculture/tomato/tomato-yellow-leaf-curl/
+yellow_leaf_curl_virus,small leaves curled upward with yellow edges,supported,S24,,https://ipm.ucanr.edu/agriculture/tomato/tomato-yellow-leaf-curl/
+scab,olive-green to black velvety spots that become corky,supported,S25,,https://www.canr.msu.edu/ipm/diseases/apple_scab
+monillia_laxa,brown rotted and wilted tissue with grey spore tufts,supported,S26,,https://apsnet.org/edcenter/disandpath/fungalasco/pdlessons/Pages/BrownRotStoneFruits.aspx
+brown_rot,brown rotting areas with grey-brown spore tufts,supported,S26,,https://apsnet.org/edcenter/disandpath/fungalasco/pdlessons/Pages/BrownRotStoneFruits.aspx
+cercospora,small round spots with grey centres and dark reddish margins,supported,S27,,https://www.canr.msu.edu/resources/cercospora-leaf-spot-of-sugarbeet
+cercospora_leaf_blight,purple to dark brown blighted areas spreading across the leaf,partial,S28,"source says purple to bronze, leathery; 'dark brown spreading' not stated",https://cropprotectionnetwork.org/encyclopedia/cercospora-leaf-blight-of-soybean
+frogeye_leaf_spot,round spots with grey centres and purple-brown borders,supported,S29,,https://cropprotectionnetwork.org/encyclopedia/frogeye-leaf-spot-of-soybean
+frog_eye_leaf_spot,round spots with grey centres and purple-brown borders,supported,S29,,https://cropprotectionnetwork.org/encyclopedia/frogeye-leaf-spot-of-soybean
+smut,black powdery spore masses,supported,S30,,https://ipm.ucanr.edu/agriculture/small-grains/loose-smut/
+loose_smut,black powdery spore masses replacing the grain head,supported,S30,,https://ipm.ucanr.edu/agriculture/small-grains/loose-smut/
+bacterial_blight,"water-soaked angular lesions that turn brown, with yellow margins",partial,S31,angular water-soaked vein-bounded lesions supported; yellow margins not stated,https://ccag.tamu.edu/wp-content/uploads/sites/10/2020/12/16_FS_FC010_Cot_Bact_Bl.pdf
+angular_leaf_spot,angular water-soaked spots bounded by veins that turn brown,supported,S32,,https://extension.illinois.edu/plant-problems/angular-leaf-spot
+bacterial_leaf_streak,narrow translucent streaks between veins that turn brown,supported,S33,,https://cropprotectionnetwork.org/publications/bacterial-leaf-streak-of-corn
+scorch,brown dry leaf margins and tips,partial,S34,marginal leaf scorch is one cultivar-dependent symptom of blueberry scorch; strawberry leaf scorch shows purple blotches instead,https://www.canr.msu.edu/uploads/files/Scorch.pdf
+septoria_leaf_spot,many small round spots with dark borders and grey centres with tiny black dots,supported,S35,,https://extension.umd.edu/resource/septoria-leaf-spot-tomatoes
+septoria,many small round spots with dark borders and grey centres,supported,S35,,https://extension.umd.edu/resource/septoria-leaf-spot-tomatoes
+ring_spot,yellow or brown rings on the leaf,partial,S36,"papaya ringspot: rings on fruit, mosaic on leaves",https://apsnet.org/edcenter/pdlessons/Pages/PapayaRingspotvirus.aspx
+sheath_blight,oval grey-green lesions with brown borders,supported,S37,,https://apsnet.org/edcenter/pdlessons/Pages/RiceSheath.aspx
+spider_mites,fine yellow stippling and bronzed leaves with thin webbing,supported,S38,,https://www.ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html
+gray_mold,grey fuzzy mould on brown rotting tissue,supported,S39,,https://ipm.ucanr.edu/home-and-landscape/botrytis-blight-or-gray-mold/
+phytophthora,dark water-soaked lesions with rapid blight and wilting,supported,S40,,https://edis.ifas.ufl.edu/publication/VH045
+fusarium_wilt,"yellowing and wilting leaves, often on one side of the plant",supported,S41,,https://plantpath.ifas.ufl.edu/u-scout/tomato/fusarium-wilt.html
+bacterial_wilt,sudden wilting of green leaves,supported,S42,,https://extension.illinois.edu/plant-problems/bacterial-wilt-cucurbits
+root_rot,"wilting, yellowing and stunted leaves",supported,S43,,https://pddc.wisc.edu/?p=4532
+canker,raised corky brown lesions with yellow halos,supported,S44,citrus canker,https://edis.ifas.ufl.edu/publication/CG040
+leaf_mold,pale yellow spots on top and olive-green velvety mould underneath,supported,S45,,https://extension.umn.edu/diseases/leaf-mold-tomato
+sooty_mould,black powdery coating on the leaf surface,supported,S46,,https://ipm.ucanr.edu/PMG/PESTNOTES/pn74108.html
+gray_leaf_spot,rectangular grey to tan lesions between the veins,supported,S47,,https://cropprotectionnetwork.org/encyclopedia/gray-leaf-spot-of-corn
+blast,diamond-shaped lesions with grey centres and brown borders,supported,S48,,https://ipm.ucanr.edu/agriculture/rice/rice-blast/
+leafblast,diamond-shaped lesions with grey centres and brown borders,supported,S48,,https://ipm.ucanr.edu/agriculture/rice/rice-blast/
+northern_leaf_blight,long cigar-shaped grey-green to tan lesions,supported,S49,,https://cropprotectionnetwork.org/encyclopedia/northern-corn-leaf-blight-of-corn
+streak_virus,thin yellow streaks along the veins,supported,S50,,https://pmc.ncbi.nlm.nih.gov/articles/PMC6640477
+sigatoka,streaks that become dark brown elongated spots with grey centres,supported,S51,,https://www.business.qld.gov.au/industries/farms-fishing-forestry/agriculture/biosecurity/plants/priority-pest-disease/black-sigatoka
+segatoka,streaks that become dark brown elongated spots with grey centres,supported,S51,,https://www.business.qld.gov.au/industries/farms-fishing-forestry/agriculture/biosecurity/plants/priority-pest-disease/black-sigatoka
+black_leaf_streak,dark brown to black streaks that merge into dead patches,supported,S52,,https://apsnet.org/edcenter/disandpath/fungalasco/pdlessons/Pages/BlackSigatoka.aspx
+aphis_spp,clusters of small soft-bodied aphids on curled sticky leaves,supported,S53,,https://www.ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html
+nutrition_deficiency,yellowing or purpling between the veins with no spots,partial,S54;S55,interveinal yellowing (Fe) and purpling (P) supported separately,https://agrilife.org/texasrowcrops/2023/12/11/iron-deficiency-symptoms-in-texas-field-crops/ https://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/phosphorusdeficiency.html
+white_spot,small round white or pale spots on the leaf,none,,no credible source found for tea white spot as small white spots; tea white scab literature differs,
+yellowing,general yellowing of the leaf,supported,S57,general chlorosis,https://pressbooks.lib.vt.edu/emgtraining/chapter/4/

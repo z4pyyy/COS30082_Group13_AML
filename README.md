@@ -1,78 +1,58 @@
-[Uploading README.md…]()
-# DPD_Small_clean — ready for training
+# COS30082 Group 13: Out-of-Distribution Plant Disease Identification
 
-Clean version of DPD-Small (COS30082 OOD Plant Disease project). Built by `data_prep/01_audit.py` → `02_build_clean.py` → `03_verify.py` (all checks pass).
+Predict the **crop + disease pair** of a leaf photo on DPD-Small (55 crops, 175 diseases, 333 pairs).
+The 10 pairs in `test_unseen` never appear in training, so a model must combine a known crop with a known disease in a new way.
 
-## Contents
+**Final model: DINO-CPS** (DINOv2 Compositional Pair Scoring), in [`3_Final_New_Approach/`](3_Final_New_Approach/).
+**Live demo (runs in your browser):** https://z4pyyy-plantdiseasevalidator.static.hf.space
 
-| File | What it is |
-|---|---|
-| `images/` | 11,443 images, 224×224 RGB JPEG (q95), EXIF rotation applied |
-| `train.csv` / `val.csv` | 7,200 / 795 — from official `train.csv` (val = 10% per comp, seed 42) |
-| `test_seen.csv` | 2,000 — official, unchanged |
-| `test_unseen.csv` | 1,448 — official, unchanged (10 unseen comps) |
-| `manifest.csv` | All 11,448 raw images + split + flags + exclude reason |
-| `label_maps.json` | id ↔ name for crop (55), disease (175), comp (333); `comp_to_crop_disease`; seen/unseen comp ids |
-| `stats.json` | Class counts in train, train mean/std, excluded files |
-| `dataset.py` | PyTorch `Dataset`, augmentation, `get_loaders()`, `class_weights()`, `balanced_sampler()` |
+## Repository layout
 
-CSV columns: `path, filename, crop_id, disease_id, comp_id, crop, disease, comp, source, flag_near_dup, flag_upscaled`.
-`path` is relative to this folder. `filename` is the original raw name.
-
-## Quick start
-
-```python
-from DPD_Small_clean.dataset import get_loaders, load_label_maps
-
-if __name__ == "__main__":            # required on Windows when num_workers > 0
-    maps = load_label_maps()
-    loaders = get_loaders(batch_size=64, num_workers=4)   # balance_by="comp_id" to over-sample rare classes
-    for x, y in loaders["train"]:     # x: (B,3,224,224) ImageNet-normalised; y: {"crop","disease","comp"}
-        ...
+```
+1_Data_Preparation/      audit, clean and split DPD-Small → DPD_Small_clean (not in git)
+2_Baselines/             brief baselines: independent CNNs (crop, disease) and multitask CNN
+   Independent_CNN_Crop/     notebook + results, 3 backbones
+   Independent_CNN_Disease/  notebook + results, 3 backbones
+   Multitask_CNN/            code + results, 3 backbones
+   train_independent.py      shared training script for the independent CNNs
+   export_onnx.py            exports the team ConvNeXt-T CNNs used by the GUI
+3_Final_New_Approach/    DINO-CPS
+   training/                 train, evaluate, ablation runs, results (3 seeds)
+   gui/                      in-browser GUI (Hugging Face static Space)
+Report/                  report source (build_report.js), figures, PDF
 ```
 
-Backbones: `torchvision.models.resnet50 / efficientnet_b3 / convnext_tiny` with `weights="DEFAULT"`. Replace the classifier head.
+## Results (test sets, %)
 
-## Rules for the team
+Pair accuracy. H = harmonic mean of seen and unseen. All choices tuned on validation only; test scored once.
 
-1. **Tune only on `val`.** Do not use `test_seen` or `test_unseen` for early stopping, LR choice or backbone choice.
-2. **Use the same loader and augmentation for all 3 backbones.** Then the backbone comparison is fair.
-3. **Use either `class_weights()` in the loss or `balance_by=` in the loader. Do not use both.**
-4. **Do not merge labels.** The official ids already merge synonyms (e.g. raw `corn_*`/`maize_*`).
+| Model | Seen T1 | Unseen T1 | H T1 | Seen T5 | Unseen T5 | H T5 |
+|---|---|---|---|---|---|---|
+| Independent ResNet50 | 63.9 | 8.4 | 14.9 | 84.7 | 40.9 | 55.1 |
+| Independent EfficientNet-B0 | 64.0 | 7.9 | 14.0 | 85.2 | 37.8 | 52.3 |
+| Independent ConvNeXt-Tiny | 63.8 | 13.6 | 22.4 | 83.8 | 39.9 | 54.0 |
+| Multitask ResNet50 | 61.8 | 4.1 | 7.6 | 85.3 | 31.7 | 46.2 |
+| Multitask EfficientNet-B0 | 61.0 | 1.4 | 2.7 | 83.3 | 22.3 | 35.2 |
+| Multitask ConvNeXt-Tiny | 63.3 | 4.2 | 7.9 | 84.0 | 20.9 | 33.5 |
+| Indep. ConvNeXt-Tiny + calibration | 54.3 | 56.6 | 55.4 | 79.4 | 86.7 | 82.9 |
+| **DINO-CPS** (mean of 3 seeds) | **63.8 ± 1.7** | **76.1 ± 1.8** | **69.4 ± 1.3** | **89.2 ± 0.8** | **97.3 ± 0.2** | **93.1 ± 0.4** |
 
-## How baselines predict unseen comps
+## DINO-CPS in one paragraph
 
-Crop and disease heads are trained on seen data only, but every unseen comp uses a seen crop and a seen disease.
-Score each of the 333 comps from the two heads, then take the top-1 / top-5:
+Two DINOv2 ViT-L/14 models are fully fine-tuned on DPD-Small: a crop model (CLS token → 55 classes) and a disease
+model (gated attention pooling over the 256 patch tokens → 175 classes). Each pair (c, d) gets the score
+log p(c) + log p(d) + w · CNN(c, d) − b · seen(c, d) + q · host-prior(c, d). The CNN term is the team ConvNeXt-T
+baseline; b removes the bias towards pairs seen in training; w, b, q are tuned on validation.
+Details, ablation and run commands: [`3_Final_New_Approach/README.md`](3_Final_New_Approach/README.md).
 
-```python
-# log_p_crop: (B,55), log_p_dis: (B,175)
-cd = torch.tensor([maps["comp_to_crop_disease"][c] for c in range(maps["num_comps"])])  # (333,2)
-comp_score = log_p_crop[:, cd[:, 0]] + log_p_dis[:, cd[:, 1]]                             # (B,333)
-```
+## Reproduce
 
-## Evaluation (brief section 3.3)
+1. **Data:** put the raw DPD-Small in `DPD_Small/`, then run `1_Data_Preparation/01_audit.py`,
+   `03_build_dataset.py`, `04_verify_dataset.py`. See [`1_Data_Preparation/CLEANING_NOTES.md`](1_Data_Preparation/CLEANING_NOTES.md).
+2. **Baselines:** the notebooks in `2_Baselines/Independent_CNN_*` (Colab, T4) and `2_Baselines/Multitask_CNN/README.md`.
+3. **DINO-CPS:** `python 3_Final_New_Approach/training/run_all.py` (GPU, about 4–5 h for 3 seeds).
 
-- Top-1 and Top-5 accuracy on comp: seen = `test_seen`, unseen = `test_unseen`.
-- Harmonic mean = 2·seen·unseen / (seen + unseen).
-- Confusion matrix on `test_seen`.
-- Also report crop accuracy and disease accuracy separately (needed for the "why is crop easier" analysis).
+## Team
 
-## What cleaning changed
-
-| Item | Result | Action |
-|---|---|---|
-| Missing / corrupt / empty files | 0 | — |
-| Images in 2 official splits | 0 | — |
-| Near-duplicates train ↔ test_seen | 5 (same photo) | **Train copy removed** (listed in `stats.json` → `excluded`) |
-| Other near-duplicates | 39 pairs inside one split | Kept. Train pairs stay in the same train/val side. |
-| Wrong extension (PNG/WEBP named .jpg, JPEG named .png) | 11 | Re-saved as JPEG |
-| RGBA images | 28 | Alpha composited onto white |
-| Short side < 224 px | 349 | Upscaled, `flag_upscaled=True` |
-| Resize | median aspect 1.0 (p5 0.75, p95 1.54) | Plain resize to 224×224, no crop (keeps edge lesions) |
-
-## Data facts for the report
-
-- Long tail: train images per comp min 1, median 7, max 544. 40 comps have 1 train image (these are train-only, not in val).
-- 46 source datasets. `CDDM` is ~38% of train. Use `source` to compare lab vs field images.
-- Val covers 204 of 323 seen comps (comps with < 5 train images are train-only).
+COS30082 Applied Machine Learning, 2026 S2, Group 13: Enoch Eren Chua (104401704), Terence Chin Seng Wong (104404059),
+Samuel Hao Jun Chang (102775957), Ji Yan Lim (104382537).
