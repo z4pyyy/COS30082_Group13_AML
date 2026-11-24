@@ -43,6 +43,10 @@ The GUI runs the int8 models in the browser (ONNX Runtime Web); no image is uplo
 python3.14 3_Final_New_Approach/gui/export_onnx.py --weights 3_Final_New_Approach/training/weights   # gui_crop.pt, gui_dis_attn.pt → int8 ONNX
 python3.14 3_Final_New_Approach/gui/eval_int8.py
 python3.14 3_Final_New_Approach/gui/build_assets.py --crop gui_crop_int8 --dis gui_dis_attn_int8
-# if the .onnx files changed: bump MODEL_CACHE in gui/static/app.js
-hf upload z4pyyy/PlantDiseaseValidator 3_Final_New_Approach/gui/static . --repo-type=space
+# models: HF model repo (Spaces have a 1 GB storage cap); after a new upload, bump MODEL_CACHE in gui/static/app.js
+hf upload z4pyyy/dino-cps 3_Final_New_Approach/gui/static/models . --repo-type model
+# page: HF Space, without the models
+hf upload z4pyyy/PlantDiseaseValidator 3_Final_New_Approach/gui/static . --repo-type=space --exclude "models/*"
 ```
+
+The page loads the models from https://huggingface.co/z4pyyy/dino-cps.

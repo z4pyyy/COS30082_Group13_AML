@@ -10,9 +10,11 @@ let meta, ev, P;                      // data/meta.json, data/eval.json, data/pa
 let last = null;                      // { canvas, att } for the attention overlay
 let pending = null;                   // photo chosen before the models finished loading
 const S = {};                         // ONNX sessions
-const MODELS = [["dino_cps_crop", "models/dino_cps_crop.int8.onnx"], ["dino_cps_disease", "models/dino_cps_disease.int8.onnx"],
-  ["cnn_crop", "models/crop_ConvNeXt-Tiny.onnx"], ["cnn_disease", "models/disease_ConvNeXt-Tiny.onnx"]];
-const MODEL_CACHE = "dino-cps-models-1";      // bump after every re-export of the .onnx files
+// Models live in a HF model repo (Spaces have a 1 GB storage cap). Upload new exports there, then bump MODEL_CACHE.
+const MODEL_URL = "https://huggingface.co/z4pyyy/dino-cps/resolve/main/";
+const MODELS = [["dino_cps_crop", "dino_cps_crop.int8.onnx"], ["dino_cps_disease", "dino_cps_disease.int8.onnx"],
+  ["cnn_crop", "crop_ConvNeXt-Tiny.onnx"], ["cnn_disease", "disease_ConvNeXt-Tiny.onnx"]].map(([k, f]) => [k, MODEL_URL + f]);
+const MODEL_CACHE = "dino-cps-models-2";      // bump after every re-export of the .onnx files
 const MEAN = [0.485, 0.456, 0.406], STD = [0.229, 0.224, 0.225];
 const pct = (v) => (v == null ? "–" : `${v.toFixed(1)}%`);
 const nice = (s) => s.replaceAll("_", " ");
